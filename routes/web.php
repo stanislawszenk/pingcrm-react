@@ -15,7 +15,8 @@
 Route::get('login')->name('login')->uses('Auth\LoginController@showLoginForm')->middleware('guest');
 Route::post('login')->name('login.attempt')->uses('Auth\LoginController@login')->middleware('guest');
 Route::post('logout')->name('logout')->uses('Auth\LoginController@logout');
-
+Route::get('reset-password')->name('reset-password')->uses('Auth\ForgotPasswordController@showResetPassword');
+Route::post('reset-password')->name('reset-password')->uses('Auth\ForgotPasswordController@resetPassword');
 // Dashboard
 Route::get('/')->name('dashboard')->uses('DashboardController')->middleware('auth');
 
@@ -50,7 +51,7 @@ Route::delete('contacts/{contact}')->name('contacts.destroy')->uses('ContactsCon
 Route::put('contacts/{contact}/restore')->name('contacts.restore')->uses('ContactsController@restore')->middleware('auth');
 
 // Reports
-Route::get('reports')->name('reports')->uses('ReportsController')->middleware('auth');
+Route::get('reports')->name('reports')->uses('ReportsController@index')->middleware('auth');
 
 // 500 error
 Route::get('500', function () {
